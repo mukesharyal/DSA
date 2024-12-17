@@ -208,6 +208,110 @@ class Linked_List
         }
 
 
+
+        void removeNodeFromBeginning()
+        {
+            if(start == nullptr)
+            {
+                cout << "The list is empty." << endl;
+                return;
+            }
+
+            Node* firstNode = start;
+
+            Node* secondNode = start->next;
+
+            delete firstNode;
+
+            start = secondNode;
+        }
+
+
+
+        void removeNodeFromEnd()
+        {
+            if(start == nullptr)
+            {
+                cout << "The list is empty." << endl;
+                return;
+            }
+
+            Node* selectedNode = start;
+
+            while((selectedNode->next->next) != nullptr) // By this way, we can get the second last node
+            {
+                selectedNode = selectedNode->next; // The second last node is selected
+            }
+
+            Node* lastNode = selectedNode->next;
+
+            delete lastNode;
+
+            selectedNode->next = nullptr;
+
+
+        }
+
+
+
+        void removeNodeAfterSpecificNode()
+        {
+            if(start == nullptr)
+            {
+                cout << "The list is empty!";
+
+                return;
+            }
+
+            int count = 0;
+            int index;
+
+            Node* selectedNode = start;
+
+            while(selectedNode->next != nullptr)
+            {
+                selectedNode = selectedNode->next;
+
+                count++;
+            }
+
+            cout << endl << "The list looks like this right now: " << endl;
+
+            show();
+
+            cout << "Enter the index after which a new node is to be removed: ";
+            cin >> index;
+
+            if(index >= count)
+            {
+                cout << "The given index is invalid!" << endl;
+
+                return;
+            }
+
+            count = 0;
+
+            selectedNode = start;
+
+            while(count != index)
+            {
+                selectedNode = selectedNode->next;
+
+                count++;
+            }
+
+            Node* palloNode = selectedNode->next->next;
+
+            Node* hataauneNode = selectedNode->next;
+
+            delete hataauneNode;
+
+            selectedNode->next = palloNode;
+        }
+
+
+
+
         void show()
         {
             if(start == nullptr)
@@ -260,8 +364,25 @@ int main()
     list.insertNodeBeforeSpecificNode();
     list.insertNodeBeforeSpecificNode();
 
+    list.show();
+
     list.insertNodeAfterSpecificNode();
     list.insertNodeAfterSpecificNode();
+
+    list.removeNodeFromBeginning();
+    list.removeNodeFromBeginning();
+
+    list.show();
+
+    list.removeNodeFromEnd();
+    list.removeNodeFromEnd();
+
+    list.show();
+
+    list.removeNodeAfterSpecificNode();
+    list.removeNodeAfterSpecificNode();
+
+    list.show();
 
     return 0;
 }
